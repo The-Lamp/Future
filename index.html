@@ -105,7 +105,7 @@
   </div>
 
   <script>
-    const CORRECT_PASSWORD = "÷<#363/3:86pass34";
+    const CORRECT_PASSWORD = "myworld2507";
 
     // Function to toggle password visibility
     function togglePassword() {
@@ -126,7 +126,7 @@
       const errorBox = document.getElementById('error-box');
       if (enteredPassword === CORRECT_PASSWORD) {
         sessionStorage.setItem('authenticated', 'true');
-        window.location.href = "secrets.html"; // Redirect to secrets page
+        window.location.href = "Plans.html"; // Redirect to secrets page
       } else {
         errorBox.style.display = "block";
         setTimeout(() => {
