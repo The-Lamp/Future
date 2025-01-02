@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Access</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+    input { padding: 10px; margin: 10px; width: 250px; }
+    button { padding: 10px 20px; }
+  </style>
+</head>
+<body>
+  <div id="password-form">
+    <h1>Enter Password</h1>
+    <input type="password" id="password" placeholder="Enter password">
+    <button onclick="checkPassword()">Submit</button>
+  </div>
+
+  <div id="access-granted" style="display: none;">
+    <h1>Your section door is open</h1>
+    <button onclick="redirectToSecrets()">Click here</button>
+  </div>
+
+  <script>
+    const CORRECT_PASSWORD = "÷<#363/3:86pass34";
+
+    // Check if password is already saved
+    if (sessionStorage.getItem('authenticated')) {
+      document.getElementById('password-form').style.display = 'none';
+      document.getElementById('access-granted').style.display = 'block';
+    }
+
+    // Function to check password
+    function checkPassword() {
+      const enteredPassword = document.getElementById('password').value;
+      if (enteredPassword === CORRECT_PASSWORD) {
+        sessionStorage.setItem('authenticated', 'true');
+        document.getElementById('password-form').style.display = 'none';
+        document.getElementById('access-granted').style.display = 'block';
+      } else {
+        alert("Incorrect Password!");
+      }
+    }
+
+    // Redirect to a secrets page
+    function redirectToSecrets() {
+      window.location.href = "secrets.html"; // Change this to your default secrets page
+    }
+  </script>
+</body>
+</html>
