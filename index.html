@@ -4,56 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Secure Access</title>
-  <link rel="stylesheet" href="styles.css">
   <style>
     body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
     input { padding: 10px; margin: 10px; width: 250px; }
     button { padding: 10px 20px; }
-    .app-view { margin-top: 30px; }
-    .app-header { margin-bottom: 20px; }
-    .app-button { padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px; }
-    .app-register { margin-top: 20px; }
-    .app-register a { color: #007BFF; text-decoration: none; }
-    .route { display: none; }
   </style>
 </head>
 <body>
-  <!-- Original Password Form -->
   <div id="password-form">
     <h1>Enter Password</h1>
     <input type="password" id="password" placeholder="Enter password">
     <button onclick="checkPassword()">Submit</button>
   </div>
 
-  <!-- Access Granted Section -->
   <div id="access-granted" style="display: none;">
     <h1>Your section door is open</h1>
     <button onclick="redirectToSecrets()">Click here</button>
   </div>
 
-  <!-- New Login Section -->
-  <div class="route" id="welcome"></div>
-  <div id="app">
-    <div class="app-view">
-      <header class="app-header">
-        <h1>Lines</h1>
-        Welcome back,<br/>
-        <span class="app-subheading">
-          Sign in to continue<br/>
-          to Lines.
-        </span>
-      </header>
-      <input type="email" required pattern=".*\.\w{2,}" placeholder="Email Address" />
-      <input type="password" required placeholder="Password" />
-      <a href="#welcome" class="app-button">Login</a>
-      <div class="app-register">
-        Don't have an account? <a href="#">Sign Up</a>
-      </div>
-    </div>
-  </div>
-
   <script>
-    const CORRECT_PASSWORD = "myworld2507";
+    const CORRECT_PASSWORD = "÷<#363/3:86pass34";
 
     // Check if password is already saved
     if (sessionStorage.getItem('authenticated')) {
@@ -75,7 +45,7 @@
 
     // Redirect to a secrets page
     function redirectToSecrets() {
-      window.location.href = "Plans.html"; // Change this to your default secrets page
+      window.location.href = "secrets.html"; // Change this to your default secrets page
     }
   </script>
 </body>
