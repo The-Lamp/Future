@@ -5,134 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Secure Access</title>
   <style>
-    /* General Styling */
-    body {
-      font-family: 'Arial', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      color: #fff;
-    }
-
-    #container {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      width: 300px;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 24px;
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      margin-bottom: 15px;
-      font-size: 16px;
-      outline: none;
-    }
-
-    button {
-      background: #2575fc;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background 0.3s ease;
-    }
-
-    button:hover {
-      background: #6a11cb;
-    }
-
-    .error {
-      display: none;
-      margin-top: 10px;
-      padding: 10px;
-      background: rgba(255, 0, 0, 0.2);
-      color: red;
-      border: 1px solid red;
-      border-radius: 5px;
-      animation: shake 0.5s;
-    }
-
-    .toggle-btn {
-      position: relative;
-      cursor: pointer;
-      float: right;
-      margin-top: -35px;
-      margin-right: 10px;
-      color: #6a11cb;
-      transition: color 0.3s;
-    }
-
-    .toggle-btn:hover {
-      color: #2575fc;
-    }
-
-    /* Animations */
-    @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-      100% { transform: translateX(0); }
-    }
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+    input { padding: 10px; margin: 10px; width: 250px; }
+    button { padding: 10px 20px; }
   </style>
 </head>
 <body>
-  <div id="container">
+  <div id="password-form">
     <h1>Enter Password</h1>
-    <div style="position: relative;">
-      <input type="password" id="password" placeholder="Enter your password">
-      <span class="toggle-btn" onclick="togglePassword()">👁️</span>
-    </div>
+    <input type="password" id="password" placeholder="Enter password">
     <button onclick="checkPassword()">Submit</button>
-    <div class="error" id="error-box">Incorrect Password! Try Again.</div>
+  </div>
+
+  <div id="access-granted" style="display: none;">
+    <h1>Your section door is open</h1>
+    <button onclick="redirectToSecrets()">Click here</button>
   </div>
 
   <script>
     const CORRECT_PASSWORD = "myworld2507";
 
-    // Function to toggle password visibility
-    function togglePassword() {
-      const passwordInput = document.getElementById('password');
-      const toggleBtn = document.querySelector('.toggle-btn');
-      if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        toggleBtn.textContent = "🙈";
+    // Check if password is already saved
+    if (sessionStorage.getItem('authenticated')) {
+      document.getElementById('password-form').style.display = 'none';
+      document.getElementById('access-granted').style.display = 'block';
+    }
+
+    // Function to check password
+    function checkPassword() {
+      const enteredPassword = document.getElementById('password').value;
+      if (enteredPassword === CORRECT_PASSWORD) {
+        sessionStorage.setItem('authenticated', 'true');
+        document.getElementById('password-form').style.display = 'none';
+        document.getElementById('access-granted').style.display = 'block';
       } else {
-        passwordInput.type = "password";
-        toggleBtn.textContent = "👁️";
+        alert("Incorrect Password!");
       }
     }
 
-    // Function to check the entered password
-    function checkPassword() {
-      const enteredPassword = document.getElementById('password').value;
-      const errorBox = document.getElementById('error-box');
-      if (enteredPassword === CORRECT_PASSWORD) {
-        sessionStorage.setItem('authenticated', 'true');
-        window.location.href = "Plans.html"; // Redirect to secrets page
-      } else {
-        errorBox.style.display = "block";
-        setTimeout(() => {
-          errorBox.style.display = "none";
-        }, 3000); // Hide error after 3 seconds
-      }
+    // Redirect to a secrets page
+    function redirectToSecrets() {
+      window.location.href = "Plans.html"; // Change this to your default secrets page
     }
   </script>
 </body>
